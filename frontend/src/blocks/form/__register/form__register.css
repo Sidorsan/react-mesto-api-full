@@ -1,0 +1,6 @@
+.form__register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 50px auto ;
+  }
