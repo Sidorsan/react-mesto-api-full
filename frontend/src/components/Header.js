@@ -4,21 +4,17 @@ import logo from "../../src/images/logo.svg";
 import { Link } from "react-router-dom";
 
 function Header(props) {
-
   return (
     <header className="header">
       <img src={logo} alt="логотип Место" className="header__logo" />
       <Switch>
-        {/* <Route path="/sign-up"> */}
         <Route path="/signup">
-          {/* <Link className="header__link" to={"/sign-in"}> */}
           <Link className="header__link" to={"/signin"}>
             Войти
           </Link>
         </Route>
-        {/* <Route path="/sign-in"> */}
+
         <Route path="/signin">
-          {/* <Link className="header__link" to={"/sign-up"}> */}
           <Link className="header__link" to={"/signup"}>
             Регистрация
           </Link>
@@ -29,7 +25,6 @@ function Header(props) {
           </p>
           <Link
             className="header__link"
-            // to={"/sign-in"}
             to={"/signin"}
             onClick={props.onLogout}
           >
