@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
-const { ConflictErrorCode } = require('../errors/ConflictErrorCode');
-const { UnauthorizedErrorCode } = require('../errors/UnauthorizedErrorCode');
+const { ConflictError } = require('../errors/ConflictError');
+const { UnauthorizedError } = require('../errors/UnauthorizedError');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 const SALT_ROUNDS = 10;
@@ -65,7 +65,7 @@ module.exports.createUser = (req, res, next) => {
         .catch((err) => {
           if (err.code === 11000) {
             next(
-              new ConflictErrorCode(
+              new ConflictError(
                 'Пользователь с данным email уже существует',
               ),
             );
@@ -139,12 +139,12 @@ module.exports.login = (req, res, next) => {
     .select('+password')
     .then((user) => {
       if (!user) {
-        next(new UnauthorizedErrorCode('Такого пользователя не существует'));
+        next(new UnauthorizedError('Такого пользователя не существует'));
         return;
       }
       bcrypt.compare(password, user.password, (err, isValidPassword) => {
         if (!isValidPassword) {
-          next(new UnauthorizedErrorCode('Пароль не верный'));
+          next(new UnauthorizedError('Пароль не верный'));
           return;
         }
         const tokenUser = jwt.sign(

@@ -1,6 +1,6 @@
 const { CONFLICT_ERROR_CODE } = require('./errorsCode');
 
-class ConflictErrorCode extends Error {
+class ConflictError extends Error {
   constructor(message) {
     super(message);
     this.statusCode = CONFLICT_ERROR_CODE;
@@ -8,5 +8,5 @@ class ConflictErrorCode extends Error {
 }
 
 module.exports = {
-  ConflictErrorCode,
+  ConflictError,
 };

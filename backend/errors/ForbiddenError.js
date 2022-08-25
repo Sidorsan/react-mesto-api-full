@@ -1,6 +1,6 @@
 const { FORBIDDEN_ERROR_CODE } = require('./errorsCode');
 
-class ForbiddenErrorCode extends Error {
+class ForbiddenError extends Error {
   constructor(message) {
     super(message);
     this.statusCode = FORBIDDEN_ERROR_CODE;
@@ -8,5 +8,5 @@ class ForbiddenErrorCode extends Error {
 }
 
 module.exports = {
-  ForbiddenErrorCode,
+  ForbiddenError,
 };

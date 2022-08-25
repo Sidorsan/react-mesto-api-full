@@ -1,5 +1,5 @@
 const Card = require('../models/card');
-const { ForbiddenErrorCode } = require('../errors/ForbiddenErrorCode');
+const { ForbiddenError } = require('../errors/ForbiddenError');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
 
@@ -33,7 +33,7 @@ module.exports.deleteCard = (req, res, next) => {
       }
 
       if (req.user._id.toString() !== card.owner.toString()) {
-        return next(new ForbiddenErrorCode('Нельзя удалить карточку другого пользователя'));
+        return next(new ForbiddenError('Нельзя удалить карточку другого пользователя'));
       }
       return Card.deleteOne(card).then(() => res.status(200).send(card));
     })
