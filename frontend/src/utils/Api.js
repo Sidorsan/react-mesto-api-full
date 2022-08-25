@@ -28,6 +28,7 @@ class Api {
         "Content-Type": "application/json",
       },
     }).then((res) => this._checkJson(res));
+
   }
 
   changeLikeCardStatus(id, isLiked) {

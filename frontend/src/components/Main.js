@@ -19,12 +19,13 @@ function Main({
     <main>
       <section className="profile">
         <div className="profile__editor-photo" onClick={onEditAvatar}>
-        {currentUser.avatar && (<img
-            src={currentUser.avatar}
-            alt="Аватар"
-            className="profile__avatar"
-          />)}
-          
+          {currentUser.avatar && (
+            <img
+              src={currentUser.avatar}
+              alt="Аватар"
+              className="profile__avatar"
+            />
+          )}
         </div>
 
         <div className="profile__info">
@@ -51,15 +52,17 @@ function Main({
           {isLoading ? (
             <Spinner />
           ) : (
-            cards.map((card) => (
-              <Card
-                key={card._id}
-                card={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-              />
-            ))
+            cards
+              .sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1))
+              .map((card) => (
+                <Card
+                  key={card._id}
+                  card={card}
+                  onCardClick={onCardClick}
+                  onCardLike={onCardLike}
+                  onCardDelete={onCardDelete}
+                />
+              ))
           )}
         </ul>
       </section>
