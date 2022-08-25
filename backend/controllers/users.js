@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const { CastErrorCode } = require('../errors/CastErrorCode');
 const { NotFoundError } = require('../errors/NotFoundError');
-const { ValidationErrorCode } = require('../errors/ValidationErrorCode');
+const { BadRequestError } = require('../errors/BadRequestError');
 const { ConflictErrorCode } = require('../errors/ConflictErrorCode');
 const { UnauthorizedErrorCode } = require('../errors/UnauthorizedErrorCode');
 
@@ -27,7 +26,7 @@ module.exports.getUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new CastErrorCode('Некорректный ID'));
+        next(new BadRequestError('Некорректный ID'));
         return;
       }
       next(err);
@@ -71,7 +70,7 @@ module.exports.createUser = (req, res, next) => {
               ),
             );
           } else if (err.name === 'ValidationError') {
-            next(new ValidationErrorCode(err.message));
+            next(new BadRequestError(err.message));
           } else {
             next(err);
           }
@@ -96,11 +95,11 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationErrorCode(err.message));
+        next(new BadRequestError(err.message));
         return;
       }
       if (err.name === 'CastError') {
-        next(new CastErrorCode('Некорректный ID'));
+        next(new BadRequestError('Некорректный ID'));
         return;
       }
       next(err);
@@ -123,11 +122,11 @@ module.exports.updateUserAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationErrorCode(err.message));
+        next(new BadRequestError(err.message));
         return;
       }
       if (err.name === 'CastError') {
-        next(new CastErrorCode('Некорректный ID'));
+        next(new BadRequestError('Некорректный ID'));
         return;
       }
       next(err);
