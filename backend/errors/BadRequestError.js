@@ -1,12 +1,12 @@
-const { VALIDATION_ERROR_CODE } = require('./errorsCode');
+const { BAD_REQUEST_ERROR } = require('./errorsCode');
 
-class ValidationErrorCode extends Error {
+class BadRequestError extends Error {
   constructor(message) {
     super(message);
-    this.statusCode = VALIDATION_ERROR_CODE;
+    this.statusCode = BAD_REQUEST_ERROR;
   }
 }
 
 module.exports = {
-  ValidationErrorCode,
+  BadRequestError,
 };

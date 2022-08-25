@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const regexUrlCheck = require('../util/regex');
 
 const userSchema = new mongoose.Schema(
   {
@@ -35,11 +36,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default:
         'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-      validate: {
-        validator(v) {
-          return validator.isURL(v);
-        },
-      },
+      pattern: regexUrlCheck,
     },
   },
   { versionKey: false },
