@@ -1,20 +1,19 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+// const validator = require('validator');
+const regexUrlCheck = require('../util/regex');
 
 const cardSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
+      minlength: 2,
+      maxlength: 30,
     },
     link: {
       type: String,
       required: true,
-      validate: {
-        validator(v) {
-          return validator.isURL(v);
-        },
-      },
+      validate: { regexUrlCheck },
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
